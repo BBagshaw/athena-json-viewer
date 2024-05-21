@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useMsal } from '@azure/msal-react';
+import ReactJson from 'react-json-view';
+import './DataViewer.css';
 
 interface PatientData {
   FIRSTNAME: string;
@@ -15,6 +18,7 @@ interface PatientData {
 
 const DataViewer: React.FC = () => {
   const [data, setData] = useState<PatientData[] | null>(null);
+  const { instance } = useMsal();
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/patients')
@@ -22,13 +26,23 @@ const DataViewer: React.FC = () => {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
+  const handleLogout = () => {
+    instance.logoutPopup().catch(e => {
+      console.error(e);
+    });
+  };
+
   return (
-    <div>
-      {data ? (
-        <pre>{JSON.stringify(data, null, 2)}</pre>
-      ) : (
-        <p>Loading data...</p>
-      )}
+    <div className="container">
+      <h1 className="header">Patient Data</h1>
+      <button className="button" onClick={handleLogout}>Logout</button>
+      <div className="data-content">
+        {data ? (
+          <ReactJson src={data} theme="monokai" />
+        ) : (
+          <p>Loading data...</p>
+        )}
+      </div>
     </div>
   );
 };

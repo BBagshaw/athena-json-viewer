@@ -1,0 +1,25 @@
+[
+    {
+      "FIRSTNAME": "John",
+      "LASTNAME": "Doe",
+      "DOB": "1980-01-01",
+      "SSN": "123-45-6789",
+      "ATHENA_PATIENT_ID": "1",
+      "ENTERPRISE_ID": "1001",
+      "MOBILE_PHONE": "555-123-4567",
+      "HOME_PHONE": "555-765-4321",
+      "ADDRESS": "123 Main St, Anytown, USA"
+    },
+    {
+      "FIRSTNAME": "Jane",
+      "LASTNAME": "Smith",
+      "DOB": "1990-02-02",
+      "SSN": "987-65-4321",
+      "ATHENA_PATIENT_ID": "2",
+      "ENTERPRISE_ID": "1002",
+      "MOBILE_PHONE": "555-987-6543",
+      "HOME_PHONE": "555-345-6789",
+      "ADDRESS": "456 Oak St, Othertown, USA"
+    }
+  ]
+  

@@ -1,44 +1,12 @@
 import React, { useEffect } from 'react';
-import { MsalProvider, useMsal, AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated } from '@azure/msal-react';
+import { MsalProvider, AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated } from '@azure/msal-react';
 import { PublicClientApplication, EventType, AccountInfo, AuthenticationResult } from '@azure/msal-browser';
 import { msalConfig } from './authConfig';
 import DataViewer from './components/DataViewer';
+import Login from './components/Login';
+import './index.css';
 
 const msalInstance = new PublicClientApplication(msalConfig);
-
-const SignInButton: React.FC = () => {
-  const { instance } = useMsal();
-  const handleLogin = () => {
-    instance.loginPopup().catch(e => {
-      console.error(e);
-    });
-  };
-
-  return <button onClick={handleLogin}>Sign In</button>;
-};
-
-const AppContent: React.FC = () => {
-  const isAuthenticated = useIsAuthenticated();
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      console.log('User is authenticated');
-    } else {
-      console.log('User is not authenticated');
-    }
-  }, [isAuthenticated]);
-
-  return (
-    <div>
-      <AuthenticatedTemplate>
-        <DataViewer />
-      </AuthenticatedTemplate>
-      <UnauthenticatedTemplate>
-        <SignInButton />
-      </UnauthenticatedTemplate>
-    </div>
-  );
-};
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -62,8 +30,12 @@ const App: React.FC = () => {
 
   return (
     <MsalProvider instance={msalInstance}>
-      <h1>EHI Viewer</h1>
-      <AppContent />
+      <AuthenticatedTemplate>
+        <DataViewer />
+      </AuthenticatedTemplate>
+      <UnauthenticatedTemplate>
+        <Login />
+      </UnauthenticatedTemplate>
     </MsalProvider>
   );
 };
