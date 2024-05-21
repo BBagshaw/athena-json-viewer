@@ -38,8 +38,7 @@ body {
   }
   
   /* Styling for the logout button */
-  .logout-button {
-    /* From https://css.glass */
+  .button {
     background: rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -51,11 +50,41 @@ body {
     margin-bottom: 20px;
     cursor: pointer;
     transition: background-color 0.3s, border 0.3s;
+    font-size: 16px;
   }
   
-  .logout-button:hover {
+  .button:hover {
     background-color: rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  
+  /* Styling for headers */
+  .header {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  /* Styling for the search bar */
+  .search-bar-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .search-bar {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.5px);
+    -webkit-backdrop-filter: blur(6.5px);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    color: #333;
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    flex-grow: 1;
   }
   
   /* Styling for the data content */
@@ -73,5 +102,67 @@ body {
     color: #fff; /* Ensure text is readable against the background */
     white-space: pre-wrap; /* Preserve formatting and wrap long lines */
     font-family: 'Courier New', Courier, monospace; /* Use a monospace font for better readability */
+  }
+  
+  /* Styling for the table */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .table th {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+  
+  .table td {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+  
+  /* Styling for pagination */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.5px);
+    -webkit-backdrop-filter: blur(6.5px);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    color: #333;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, border 0.3s;
+  }
+  
+  .pagination button:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  
+  .pagination input {
+    width: 50px;
+    padding: 5px;
+    margin: 0 5px;
+  }
+  
+  .pagination select {
+    padding: 5px;
+    margin: 0 5px;
   }
   
