@@ -128,3 +128,53 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# React Native
+react-native/ios/build/
+react-native/android/app/build/
+
+# VS Code
+.vscode/*
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# JetBrains Rider
+.idea/
+*.sln
+*.csproj
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Linux
+*~
+
+# Generated files
+public/js/*.map
+public/js/*.json
+
+# Built frontend files
+/frontend/build/
+
+# Temporary files
+*.swp
+*~
+*.swo
+*.tmp
+
+# GitHub Actions
+.github/
