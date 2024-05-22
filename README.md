@@ -1,6 +1,3 @@
-### `README.md`
-
-
 # Athena JSON Viewer
 
 Athena JSON Viewer is a modern web application designed to securely display patient data in a visually appealing and user-friendly manner. Utilizing Azure AD for authentication, this application ensures that only authorized users can access the sensitive information. The app features a sleek design with glassmorphism effects and a responsive layout.
@@ -19,27 +16,30 @@ Athena JSON Viewer is a modern web application designed to securely display pati
 
 - **Secure Authentication**: Uses Azure AD (Microsoft Entra ID) for secure user authentication.
 - **Modern UI**: Glassmorphism design for a clean and modern look.
-- **Data Viewer**: Displays patient data in a tree view using `react-json-view`.
+- **Data Viewer**: Displays patient data in a table view using `react-table`.
 - **Responsive Design**: Ensures usability across various devices and screen sizes.
 
 ## Technologies Used
 
-- **Frontend**:
-  - React
-  - TypeScript
-  - `react-json-view` for displaying JSON data
-  - CSS for styling with glassmorphism effects
+### Frontend
 
-- **Backend**:
-  - Node.js
-  - Express
-  - MongoDB
-  - Mongoose
+- React
+- TypeScript
+- `react-table` for displaying table data
+- CSS for styling with glassmorphism effects
 
-- **Authentication**:
-  - Azure AD (Microsoft Entra ID)
-  - `@azure/msal-react`
-  - `@azure/msal-browser`
+### Backend
+
+- Node.js
+- Express
+- MongoDB
+- Mongoose
+
+### Authentication
+
+- Azure AD (Microsoft Entra ID)
+- `@azure/msal-react`
+- `@azure/msal-browser`
 
 ## Setup and Installation
 
@@ -51,13 +51,13 @@ Athena JSON Viewer is a modern web application designed to securely display pati
 
 ### Installation
 
-1. **Clone the repository**:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/athena-json-viewer.git
+   git clone https://github.com/bbagshawAPFHC/athena-json-viewer.git
    cd athena-json-viewer
    ```
 
-2. **Install dependencies**:
+2. Install dependencies:
 
    **Frontend**:
    ```bash
@@ -71,22 +71,29 @@ Athena JSON Viewer is a modern web application designed to securely display pati
    npm install
    ```
 
-3. **Configure Azure AD**:
-
+3. Configure Azure AD:
    - Register your application in Azure AD.
    - Set the redirect URI to `http://localhost:3000`.
-   - Update the `authConfig.ts` file in the `frontend/src` directory with your Azure AD credentials:
-     ```typescript
-     export const msalConfig = {
-       auth: {
-         clientId: 'YOUR_CLIENT_ID',
-         authority: 'https://login.microsoftonline.com/YOUR_TENANT_ID',
-         redirectUri: 'http://localhost:3000',
-       },
-     };
+   - Create a `.env` file in the `frontend` directory and add your Azure AD credentials:
+     ```
+     REACT_APP_CLIENT_ID=your_client_id
+     REACT_APP_TENANT_ID=your_tenant_id
      ```
 
-4. **Import Dummy Data**:
+4. Update `authConfig.ts` to use environment variables:
+
+   **frontend/src/authConfig.ts**:
+   ```typescript
+   export const msalConfig = {
+     auth: {
+       clientId: process.env.REACT_APP_CLIENT_ID || '',
+       authority: `https://login.microsoftonline.com/${process.env.REACT_APP_TENANT_ID}`,
+       redirectUri: 'http://localhost:3000',
+     },
+   };
+   ```
+
+5. Import Dummy Data:
    - Ensure MongoDB is running.
    - Run the script to import dummy data:
      ```bash
@@ -94,7 +101,7 @@ Athena JSON Viewer is a modern web application designed to securely display pati
      node importData.js
      ```
 
-5. **Run the application**:
+6. Run the application:
 
    **Backend**:
    ```bash
@@ -108,7 +115,7 @@ Athena JSON Viewer is a modern web application designed to securely display pati
    npm start
    ```
 
-6. **Open the application**:
+7. Open the application:
    - Navigate to `http://localhost:3000` in your browser.
 
 ## Usage
@@ -117,17 +124,18 @@ Athena JSON Viewer is a modern web application designed to securely display pati
    - Click the "Sign In" button to authenticate using Azure AD.
 
 2. **View Data**:
-   - Once authenticated, view the patient data displayed in a tree view format.
+   - Once authenticated, use the search bar to find specific patient data and view the results in a table format.
 
 3. **Logout**:
    - Click the "Logout" button to sign out.
 
 ## Project Structure
 
-```
+```plaintext
 athena-json-viewer/
 │
 ├── frontend/
+│   ├── .env
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── DataViewer.tsx
