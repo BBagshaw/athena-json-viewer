@@ -1,36 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useMsal } from '@azure/msal-react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import './DataViewer.css';
 
 interface PatientData {
-  id: string;
   FIRSTNAME: string;
   LASTNAME: string;
   DOB: string;
   SSN: string;
   ATHENA_PATIENT_ID: string;
-  ENTERPRISE_ID: string;
-  MOBILE_PHONE: string;
-  HOME_PHONE: string;
-  ADDRESS: string;
+  [key: string]: any; // Allow any additional properties
 }
 
 const DataViewer: React.FC = () => {
-  const [data, setData] = useState<PatientData[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [filteredData, setFilteredData] = useState<PatientData[]>([]);
+  const [data, setData] = useState<PatientData[] | null>(null);
+  const [filteredData, setFilteredData] = useState<PatientData[] | null>(null);
+  const [selectedPatient, setSelectedPatient] = useState<PatientData | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
   const { instance } = useMsal();
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/patients')
       .then(response => {
-        setData(response.data.map((item: any, index: number) => ({ ...item, id: index.toString() })));
-        setFilteredData(response.data.map((item: any, index: number) => ({ ...item, id: index.toString() })));
+        setData(response.data);
+        setFilteredData(response.data);
       })
       .catch(error => console.error('Error fetching data:', error));
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      setFilteredData(
+        data.filter(patient =>
+          `${patient.FIRSTNAME} ${patient.LASTNAME}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          patient.ATHENA_PATIENT_ID.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          patient.SSN.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    }
+  }, [searchTerm, data]);
 
   const handleLogout = () => {
     instance.logoutPopup().catch(e => {
@@ -38,61 +46,68 @@ const DataViewer: React.FC = () => {
     });
   };
 
-  const handleSearch = () => {
-    const lowercasedFilter = searchTerm.toLowerCase();
-    const filtered = data.filter(patient => {
-      return Object.keys(patient).some(key => {
-        const value = (patient as any)[key];
-        return value.toString().toLowerCase().includes(lowercasedFilter);
-      });
-    });
-    setFilteredData(filtered);
+  const handleRowClick = (patient: PatientData) => {
+    setSelectedPatient(patient);
   };
 
-  const columns: GridColDef[] = [
-    { field: 'FIRSTNAME', headerName: 'First Name', width: 150 },
-    { field: 'LASTNAME', headerName: 'Last Name', width: 150 },
-    { field: 'DOB', headerName: 'DOB', width: 150 },
-    { field: 'SSN', headerName: 'SSN', width: 150 },
-    { field: 'ATHENA_PATIENT_ID', headerName: 'Patient ID', width: 150 },
-    { field: 'ENTERPRISE_ID', headerName: 'Enterprise ID', width: 150 },
-    { field: 'MOBILE_PHONE', headerName: 'Mobile Phone', width: 150 },
-    { field: 'HOME_PHONE', headerName: 'Home Phone', width: 150 },
-    { field: 'ADDRESS', headerName: 'Address', width: 200 },
-  ];
+  const handleCloseModal = () => {
+    setSelectedPatient(null);
+  };
 
   return (
-    <div className="dashboard">
-      <aside className="sidebar">
-        <div className="sidebar-header">
-          <h2>Archive Access</h2>
-        </div>
-        <nav className="sidebar-nav">
-          <a href="#">Dashboard</a>
-          <a href="#">Search Patients</a>
-        </nav>
-      </aside>
-      <main className="main-content">
-        <header className="header">
-          <h1>Welcome, User!</h1>
-          <div className="header-right">
-            <button className="button" onClick={handleLogout}>Logout</button>
+    <div className="container">
+      <div className="header">
+        <h1>EHI Viewer</h1>
+      </div>
+      <div className="search-bar-container">
+        <input
+          type="text"
+          placeholder="Search by name, Athena patient ID, or SSN..."
+          className="search-bar"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className="data-content">
+        {filteredData ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Athena Patient ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredData.map((patient, index) => (
+                <tr key={index} onClick={() => handleRowClick(patient)}>
+                  <td>{patient.FIRSTNAME} {patient.LASTNAME}</td>
+                  <td>{new Date(patient.DOB).toLocaleDateString()}</td>
+                  <td>{patient.ATHENA_PATIENT_ID}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>Loading data...</p>
+        )}
+      </div>
+      {selectedPatient && (
+        <div className="modal" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>{selectedPatient.FIRSTNAME} {selectedPatient.LASTNAME}</h2>
+            <p><strong>Date of Birth:</strong> {new Date(selectedPatient.DOB).toLocaleDateString()}</p>
+            <p><strong>Athena Patient ID:</strong> {selectedPatient.ATHENA_PATIENT_ID}</p>
+            {Object.entries(selectedPatient).map(([key, value]) => (
+              key !== 'FIRSTNAME' && key !== 'LASTNAME' && key !== 'DOB' && key !== 'ATHENA_PATIENT_ID' && (
+                <p key={key}><strong>{key}:</strong> {typeof value === 'object' ? JSON.stringify(value) : value}</p>
+              )
+            ))}
+            <button className="button" onClick={handleCloseModal}>Close</button>
           </div>
-        </header>
-        <div className="search-bar-container">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Enter search term..."
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-          />
-          <button className="button" onClick={handleSearch}>Search</button>
         </div>
-        <div className="data-content" style={{ height: 600, width: '90%' }}>
-          <DataGrid rows={filteredData} columns={columns} autoPageSize={false} />
-        </div>
-      </main>
+      )}
+      <button className="button" onClick={handleLogout}>Logout</button>
     </div>
   );
 };

@@ -1,24 +1,26 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
 import cors from 'cors';
+import { json, urlencoded } from 'body-parser';
+import dotenv from 'dotenv';
 import patientRoutes from './routes/patient';
+
+dotenv.config(); // Make sure this line is present to load .env variables
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Middleware
-app.use(bodyParser.json());
 app.use(cors());
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
-// MongoDB connection
-mongoose.connect('mongodb://localhost:27017/ehi_viewer')
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Could not connect to MongoDB', err));
+app.use('/api/patients', patientRoutes);
 
-// Use routes
-app.use('/api', patientRoutes);
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+mongoose.connect(process.env.MONGODB_URI || '').then(() => {
+  console.log('Connected to MongoDB');
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}).catch((error) => {
+  console.error('MongoDB connection error:', error);
 });

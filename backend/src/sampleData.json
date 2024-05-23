@@ -1,0 +1,179 @@
+[
+    {
+      "FIRSTNAME": "John",
+      "LASTNAME": "Doe",
+      "DOB": "1980-01-01",
+      "SSN": "123-45-6789",
+      "ATHENA_PATIENT_ID": "1",
+      "ENTERPRISE_ID": "1001",
+      "MOBILE_PHONE": "555-123-4567",
+      "HOME_PHONE": "555-765-4321",
+      "ADDRESS": "123 Main St, Anytown, USA",
+      "EMAIL": "john.doe@example.com",
+      "GENDER": "Male",
+      "MARITAL_STATUS": "Married",
+      "RACE": "Caucasian",
+      "ETHNICITY": "Non-Hispanic",
+      "PREFERRED_LANGUAGE": "English",
+      "EMERGENCY_CONTACT": {
+        "NAME": "Jane Doe",
+        "RELATIONSHIP": "Wife",
+        "PHONE": "555-765-4321"
+      }
+    },
+    {
+      "FIRSTNAME": "Jane",
+      "LASTNAME": "Smith",
+      "DOB": "1990-02-02",
+      "SSN": "987-65-4321",
+      "ATHENA_PATIENT_ID": "2",
+      "ENTERPRISE_ID": "1002",
+      "MOBILE_PHONE": "555-987-6543",
+      "HOME_PHONE": "555-345-6789",
+      "ADDRESS": "456 Oak St, Othertown, USA",
+      "EMAIL": "jane.smith@example.com",
+      "GENDER": "Female",
+      "MARITAL_STATUS": "Single",
+      "RACE": "African American",
+      "ETHNICITY": "Hispanic",
+      "PREFERRED_LANGUAGE": "Spanish",
+      "EMERGENCY_CONTACT": {
+        "NAME": "John Smith",
+        "RELATIONSHIP": "Brother",
+        "PHONE": "555-345-6789"
+      }
+    },
+    {
+      "FIRSTNAME": "Tony",
+      "LASTNAME": "Stark",
+      "DOB": "1970-05-29",
+      "SSN": "111-22-3333",
+      "ATHENA_PATIENT_ID": "3",
+      "ENTERPRISE_ID": "1003",
+      "MOBILE_PHONE": "555-101-0101",
+      "HOME_PHONE": "555-202-0202",
+      "ADDRESS": "10880 Malibu Point, Malibu, CA",
+      "EMAIL": "tony.stark@starkindustries.com",
+      "GENDER": "Male",
+      "MARITAL_STATUS": "Single",
+      "RACE": "Caucasian",
+      "ETHNICITY": "Non-Hispanic",
+      "PREFERRED_LANGUAGE": "English",
+      "EMERGENCY_CONTACT": {
+        "NAME": "Pepper Potts",
+        "RELATIONSHIP": "Assistant",
+        "PHONE": "555-303-0303"
+      }
+    },
+    {
+      "FIRSTNAME": "Bruce",
+      "LASTNAME": "Wayne",
+      "DOB": "1939-05-27",
+      "SSN": "444-55-6666",
+      "ATHENA_PATIENT_ID": "4",
+      "ENTERPRISE_ID": "1004",
+      "MOBILE_PHONE": "555-404-0404",
+      "HOME_PHONE": "555-505-0505",
+      "ADDRESS": "1007 Mountain Drive, Gotham City, NY",
+      "EMAIL": "bruce.wayne@wayneenterprises.com",
+      "GENDER": "Male",
+      "MARITAL_STATUS": "Single",
+      "RACE": "Caucasian",
+      "ETHNICITY": "Non-Hispanic",
+      "PREFERRED_LANGUAGE": "English",
+      "EMERGENCY_CONTACT": {
+        "NAME": "Alfred Pennyworth",
+        "RELATIONSHIP": "Butler",
+        "PHONE": "555-606-0606"
+      }
+    },
+    {
+      "FIRSTNAME": "Clark",
+      "LASTNAME": "Kent",
+      "DOB": "1938-06-18",
+      "SSN": "777-88-9999",
+      "ATHENA_PATIENT_ID": "5",
+      "ENTERPRISE_ID": "1005",
+      "MOBILE_PHONE": "555-707-0707",
+      "HOME_PHONE": "555-808-0808",
+      "ADDRESS": "344 Clinton St, Metropolis, IL",
+      "EMAIL": "clark.kent@dailyplanet.com",
+      "GENDER": "Male",
+      "MARITAL_STATUS": "Married",
+      "RACE": "Caucasian",
+      "ETHNICITY": "Non-Hispanic",
+      "PREFERRED_LANGUAGE": "English",
+      "EMERGENCY_CONTACT": {
+        "NAME": "Lois Lane",
+        "RELATIONSHIP": "Wife",
+        "PHONE": "555-909-0909"
+      }
+    },
+    {
+      "FIRSTNAME": "Diana",
+      "LASTNAME": "Prince",
+      "DOB": "1920-03-22",
+      "SSN": "000-11-2222",
+      "ATHENA_PATIENT_ID": "6",
+      "ENTERPRISE_ID": "1006",
+      "MOBILE_PHONE": "555-111-2222",
+      "HOME_PHONE": "555-333-4444",
+      "ADDRESS": "Themyscira Island",
+      "EMAIL": "diana.prince@justiceleague.com",
+      "GENDER": "Female",
+      "MARITAL_STATUS": "Single",
+      "RACE": "Caucasian",
+      "ETHNICITY": "Non-Hispanic",
+      "PREFERRED_LANGUAGE": "English",
+      "EMERGENCY_CONTACT": {
+        "NAME": "Steve Trevor",
+        "RELATIONSHIP": "Friend",
+        "PHONE": "555-555-6666"
+      }
+    },
+    {
+      "FIRSTNAME": "Peter",
+      "LASTNAME": "Parker",
+      "DOB": "2001-08-10",
+      "SSN": "333-44-5555",
+      "ATHENA_PATIENT_ID": "7",
+      "ENTERPRISE_ID": "1007",
+      "MOBILE_PHONE": "555-777-8888",
+      "HOME_PHONE": "555-999-0000",
+      "ADDRESS": "20 Ingram St, Queens, NY",
+      "EMAIL": "peter.parker@dailybugle.com",
+      "GENDER": "Male",
+      "MARITAL_STATUS": "Single",
+      "RACE": "Caucasian",
+      "ETHNICITY": "Non-Hispanic",
+      "PREFERRED_LANGUAGE": "English",
+      "EMERGENCY_CONTACT": {
+        "NAME": "May Parker",
+        "RELATIONSHIP": "Aunt",
+        "PHONE": "555-222-3333"
+      }
+    },
+    {
+      "FIRSTNAME": "Natasha",
+      "LASTNAME": "Romanoff",
+      "DOB": "1984-11-22",
+      "SSN": "666-77-8888",
+      "ATHENA_PATIENT_ID": "8",
+      "ENTERPRISE_ID": "1008",
+      "MOBILE_PHONE": "555-444-5555",
+      "HOME_PHONE": "555-666-7777",
+      "ADDRESS": "Avengers Tower, Manhattan, NY",
+      "EMAIL": "natasha.romanoff@shield.gov",
+      "GENDER": "Female",
+      "MARITAL_STATUS": "Single",
+      "RACE": "Caucasian",
+      "ETHNICITY": "Non-Hispanic",
+      "PREFERRED_LANGUAGE": "Russian",
+      "EMERGENCY_CONTACT": {
+        "NAME": "Clint Barton",
+        "RELATIONSHIP": "Friend",
+        "PHONE": "555-888-9999"
+      }
+    }
+  ]
+  
