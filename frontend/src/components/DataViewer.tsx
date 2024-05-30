@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useMsal } from '@azure/msal-react';
+import { useTable, useSortBy, Column, HeaderGroup } from 'react-table';
 import './DataViewer.css';
 
 interface PatientData {
-  FIRSTNAME: string;
-  LASTNAME: string;
-  DOB: string;
-  SSN: string;
-  ATHENA_PATIENT_ID: string;
-  [key: string]: any; // Allow any additional properties
+  patientdetails: {
+    firstname: string;
+    lastname: string;
+    dob: string;
+    ssn: string;
+    athenapatientid: string;
+    address1: string;
+    homephone: string;
+    city: string;
+    state: string;
+  };
+  [key: string]: any;
+}
+
+interface ExtendedColumn extends HeaderGroup<PatientData> {
+  getSortByToggleProps: () => any;
 }
 
 const DataViewer: React.FC = () => {
-  const [data, setData] = useState<PatientData[] | null>(null);
-  const [filteredData, setFilteredData] = useState<PatientData[] | null>(null);
+  const [data, setData] = useState<PatientData[]>([]);
+  const [filteredData, setFilteredData] = useState<PatientData[]>([]);
   const [selectedPatient, setSelectedPatient] = useState<PatientData | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const { instance } = useMsal();
@@ -30,11 +41,12 @@ const DataViewer: React.FC = () => {
 
   useEffect(() => {
     if (data) {
+      const lowerCaseSearchTerm = searchTerm.toLowerCase();
       setFilteredData(
         data.filter(patient =>
-          `${patient.FIRSTNAME} ${patient.LASTNAME}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          patient.ATHENA_PATIENT_ID.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          patient.SSN.toLowerCase().includes(searchTerm.toLowerCase())
+          `${patient.patientdetails.firstname} ${patient.patientdetails.lastname}`.toLowerCase().includes(lowerCaseSearchTerm) ||
+          patient.patientdetails.athenapatientid.toLowerCase().includes(lowerCaseSearchTerm) ||
+          patient.patientdetails.ssn.toLowerCase().includes(lowerCaseSearchTerm)
         )
       );
     }
@@ -54,60 +66,91 @@ const DataViewer: React.FC = () => {
     setSelectedPatient(null);
   };
 
+  const columns: Column<PatientData>[] = React.useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: (row: PatientData) => `${row.patientdetails.firstname} ${row.patientdetails.lastname}`,
+        id: 'name',
+      },
+      {
+        Header: 'Date of Birth',
+        accessor: (row: PatientData) => new Date(row.patientdetails.dob).toLocaleDateString(),
+        id: 'dob',
+      },
+      {
+        Header: 'Athena Patient ID',
+        accessor: 'patientdetails.athenapatientid',
+      },
+    ],
+    []
+  );
+
+  const tableInstance = useTable({ columns, data: filteredData }, useSortBy);
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({ columns, data }, useSortBy);
+
   return (
-    <div className="container">
-      <div className="header">
-        <h1>EHI Viewer</h1>
-      </div>
+    <div>
       <div className="search-bar-container">
         <input
           type="text"
-          placeholder="Search by name, Athena patient ID, or SSN..."
+          placeholder="Search..."
           className="search-bar"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <div className="data-content">
-        {filteredData ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Date of Birth</th>
-                <th>Athena Patient ID</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredData.map((patient, index) => (
-                <tr key={index} onClick={() => handleRowClick(patient)}>
-                  <td>{patient.FIRSTNAME} {patient.LASTNAME}</td>
-                  <td>{new Date(patient.DOB).toLocaleDateString()}</td>
-                  <td>{patient.ATHENA_PATIENT_ID}</td>
-                </tr>
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup: HeaderGroup<PatientData>) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? ' 🔽'
+                        : ' 🔼'
+                      : ''}
+                  </span>
+                </th>
               ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>Loading data...</p>
-        )}
-      </div>
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()} onClick={() => handleRowClick(row.original)}>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <button className="button" onClick={handleLogout}>Logout</button>
       {selectedPatient && (
         <div className="modal" onClick={handleCloseModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>{selectedPatient.FIRSTNAME} {selectedPatient.LASTNAME}</h2>
-            <p><strong>Date of Birth:</strong> {new Date(selectedPatient.DOB).toLocaleDateString()}</p>
-            <p><strong>Athena Patient ID:</strong> {selectedPatient.ATHENA_PATIENT_ID}</p>
-            {Object.entries(selectedPatient).map(([key, value]) => (
-              key !== 'FIRSTNAME' && key !== 'LASTNAME' && key !== 'DOB' && key !== 'ATHENA_PATIENT_ID' && (
-                <p key={key}><strong>{key}:</strong> {typeof value === 'object' ? JSON.stringify(value) : value}</p>
-              )
-            ))}
+            <h2>Additional Information</h2>
+            <p>Name: {`${selectedPatient.patientdetails.firstname} ${selectedPatient.patientdetails.lastname}`}</p>
+            <p>Date of Birth: {new Date(selectedPatient.patientdetails.dob).toLocaleDateString()}</p>
+            {/* Add more fields as needed */}
             <button className="button" onClick={handleCloseModal}>Close</button>
           </div>
         </div>
       )}
-      <button className="button" onClick={handleLogout}>Logout</button>
     </div>
   );
 };

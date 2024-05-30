@@ -1,121 +1,191 @@
-import { Schema, model, Document } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
-interface EmergencyContact {
-  NAME: string;
-  RELATIONSHIP: string;
-  PHONE: string;
+// Interface for Patient Document
+interface IPatient extends Document {
+  patientdemographics: {
+    maritalstatusname: string;
+    lastupdatedby: string;
+    contactpreference_announcement_sms: boolean;
+    zip: string;
+    patientid: string;
+    contactpreference_billing_phone: boolean;
+    guarantordob: Date;
+    ethnicitycodes: string[];
+    guarantorcountrycode: string;
+    agriculturalworker: string;
+    guarantorcountrycode3166: string;
+    homebound: boolean;
+    lastupdated: Date;
+    city: string;
+    guarantorrelationshiptopatient: string;
+    departmentid: string;
+    schoolbasedhealthcenter: string;
+    firstname: string;
+    contactpreference_billing_sms: boolean;
+    portalaccessgiven: boolean;
+    confidentialitycode: string;
+    portaltermsonfile: boolean;
+    publichousing: string;
+    ethnicitycode: string;
+    language6392code: string;
+    contactpreference_lab_sms: boolean;
+    guarantoraddress1: string;
+    driverslicense: boolean;
+    address1: string;
+    primaryproviderid: string;
+    dob: Date;
+    emailexists: boolean;
+    primarydepartmentid: string;
+    patientphoto: boolean;
+    guarantorzip: string;
+    maritalstatus: string;
+    ssn: string;
+    status: string;
+    race: string[];
+    contactpreference_announcement_email: boolean;
+    sex: string;
+    contactpreference_lab_email: boolean;
+    contactpreference_appointment_email: boolean;
+    homephone: string;
+    guarantorfirstname: string;
+    guarantorstate: string;
+    contactpreference_announcement_phone: boolean;
+    guarantoraddresssameaspatient: boolean;
+    contactpreference_lab_phone: boolean;
+    guarantorphone: string;
+    balances: {
+      balance: number;
+      cleanbalance: boolean;
+    }[];
+    privacyinformationverified: boolean;
+    consenttocall: boolean;
+    contactpreference_appointment_phone: boolean;
+    guarantorssn: string;
+    lastname: string;
+    contactpreference_billing_email: boolean;
+    homeless: string;
+    racename: string;
+    countrycode3166: string;
+    countrycode: string;
+    racecode: string;
+    state: string;
+    caresummarydeliverypreference: string;
+    registrationdate: Date;
+    firstappointment: Date;
+    guarantorcity: string;
+    medicationhistoryconsentverified: boolean;
+    guarantorlastname: string;
+    lastappointment: Date;
+    contactpreference_appointment_sms: boolean;
+    veteran: string;
+  }[];
+  patientdetails: {
+    state: string;
+    lastname: string;
+    firstname: string;
+    homephone: string;
+    zip: string;
+    ssn: string;
+    enterpriseid: string;
+    address1: string;
+    dob: Date;
+    city: string;
+    athenapatientid: string;
+  };
 }
 
-interface Patient extends Document {
-  FIRSTNAME: string;
-  LASTNAME: string;
-  DOB: Date;
-  SSN: string;
-  ATHENA_PATIENT_ID: string;
-  ENTERPRISE_ID: string;
-  MOBILE_PHONE: string;
-  HOME_PHONE: string;
-  ADDRESS: string;
-  EMAIL?: string;
-  GENDER?: string;
-  MARITAL_STATUS?: string;
-  RACE?: string;
-  ETHNICITY?: string;
-  PREFERRED_LANGUAGE?: string;
-  EMERGENCY_CONTACT?: EmergencyContact;
-  ALLERGIES?: any[];
-  ASSESSMENT_AND_PLAN?: any[];
-  CANCER_CASES?: any[];
-  CARE_PLAN?: any[];
-  CARE_TEAM_MEMBERS?: any[];
-  CHART_ALERT?: any[];
-  CHIEF_COMPLAINT?: any[];
-  CLINICAL_DOCUMENTS?: any[];
-  CORRECTIVE_LENS?: any[];
-  DEFAULT_CLINICAL_PROVIDERS?: any[];
-  DEVICES_OR_MEDICAL_EQUIPMENT?: any[];
-  DME_ORDERS?: any[];
-  ENCOUNTER_DOCUMENTS?: any[];
-  ENCOUNTERS?: any[];
-  FAMILY_HISTORY?: any[];
-  GOALS?: any[];
-  GYN_HISTORY?: any[];
-  HEALTH_CONCERNS?: any[];
-  HISTORY_OF_PRESENT_ILLNESS?: any[];
-  IMAGING_RESULTS?: any[];
-  IMMUNIZATIONS?: any[];
-  LAB_RESULTS?: any[];
-  MEDICAL_RECORD_DOCUMENTS?: any[];
-  MEDICATIONS?: any[];
-  OBSERVATIONS?: any[];
-  ORDERS?: any[];
-  PAST_MEDICAL_HISTORY?: any[];
-  PHYSICAL_EXAM?: any[];
-  PROCEDURES?: any[];
-  REVIEW_OF_SYSTEMS?: any[];
-  SOCIAL_HISTORY?: any[];
-  SURGICAL_HISTORY?: any[];
-  VITALS?: any[];
-}
-
-const emergencyContactSchema = new Schema<EmergencyContact>({
-  NAME: { type: String, required: true },
-  RELATIONSHIP: { type: String, required: true },
-  PHONE: { type: String, required: true }
+// Schema for Patient
+const PatientSchema: Schema = new Schema({
+  patientdemographics: [{
+    maritalstatusname: { type: String },
+    lastupdatedby: { type: String },
+    contactpreference_announcement_sms: { type: Boolean },
+    zip: { type: String },
+    patientid: { type: String },
+    contactpreference_billing_phone: { type: Boolean },
+    guarantordob: { type: Date },
+    ethnicitycodes: [{ type: String }],
+    guarantorcountrycode: { type: String },
+    agriculturalworker: { type: String },
+    guarantorcountrycode3166: { type: String },
+    homebound: { type: Boolean },
+    lastupdated: { type: Date },
+    city: { type: String },
+    guarantorrelationshiptopatient: { type: String },
+    departmentid: { type: String },
+    schoolbasedhealthcenter: { type: String },
+    firstname: { type: String },
+    contactpreference_billing_sms: { type: Boolean },
+    portalaccessgiven: { type: Boolean },
+    confidentialitycode: { type: String },
+    portaltermsonfile: { type: Boolean },
+    publichousing: { type: String },
+    ethnicitycode: { type: String },
+    language6392code: { type: String },
+    contactpreference_lab_sms: { type: Boolean },
+    guarantoraddress1: { type: String },
+    driverslicense: { type: Boolean },
+    address1: { type: String },
+    primaryproviderid: { type: String },
+    dob: { type: Date },
+    emailexists: { type: Boolean },
+    primarydepartmentid: { type: String },
+    patientphoto: { type: Boolean },
+    guarantorzip: { type: String },
+    maritalstatus: { type: String },
+    ssn: { type: String },
+    status: { type: String },
+    race: [{ type: String }],
+    contactpreference_announcement_email: { type: Boolean },
+    sex: { type: String },
+    contactpreference_lab_email: { type: Boolean },
+    contactpreference_appointment_email: { type: Boolean },
+    homephone: { type: String },
+    guarantorfirstname: { type: String },
+    guarantorstate: { type: String },
+    contactpreference_announcement_phone: { type: Boolean },
+    guarantoraddresssameaspatient: { type: Boolean },
+    contactpreference_lab_phone: { type: Boolean },
+    guarantorphone: { type: String },
+    balances: [{
+      balance: { type: Number },
+      cleanbalance: { type: Boolean }
+    }],
+    privacyinformationverified: { type: Boolean },
+    consenttocall: { type: Boolean },
+    contactpreference_appointment_phone: { type: Boolean },
+    guarantorssn: { type: String },
+    lastname: { type: String },
+    contactpreference_billing_email: { type: Boolean },
+    homeless: { type: String },
+    racename: { type: String },
+    countrycode3166: { type: String },
+    countrycode: { type: String },
+    racecode: { type: String },
+    state: { type: String },
+    caresummarydeliverypreference: { type: String },
+    registrationdate: { type: Date },
+    firstappointment: { type: Date },
+    guarantorcity: { type: String },
+    medicationhistoryconsentverified: { type: Boolean },
+    guarantorlastname: { type: String },
+    lastappointment: { type: Date },
+    contactpreference_appointment_sms: { type: Boolean },
+    veteran: { type: String }
+  }],
+  patientdetails: {
+    state: { type: String },
+    lastname: { type: String },
+    firstname: { type: String },
+    homephone: { type: String },
+    zip: { type: String },
+    ssn: { type: String },
+    enterpriseid: { type: String },
+    address1: { type: String },
+    dob: { type: Date },
+    city: { type: String },
+    athenapatientid: { type: String }
+  }
 });
 
-const patientSchema = new Schema<Patient>({
-  FIRSTNAME: { type: String, required: true },
-  LASTNAME: { type: String, required: true },
-  DOB: { type: Date, required: true },
-  SSN: { type: String, required: true },
-  ATHENA_PATIENT_ID: { type: String, required: true },
-  ENTERPRISE_ID: { type: String, required: true },
-  MOBILE_PHONE: { type: String, required: true },
-  HOME_PHONE: { type: String, required: true },
-  ADDRESS: { type: String, required: true },
-  EMAIL: { type: String },
-  GENDER: { type: String },
-  MARITAL_STATUS: { type: String },
-  RACE: { type: String },
-  ETHNICITY: { type: String },
-  PREFERRED_LANGUAGE: { type: String },
-  EMERGENCY_CONTACT: { type: emergencyContactSchema },
-  ALLERGIES: [{ type: Schema.Types.Mixed }],
-  ASSESSMENT_AND_PLAN: [{ type: Schema.Types.Mixed }],
-  CANCER_CASES: [{ type: Schema.Types.Mixed }],
-  CARE_PLAN: [{ type: Schema.Types.Mixed }],
-  CARE_TEAM_MEMBERS: [{ type: Schema.Types.Mixed }],
-  CHART_ALERT: [{ type: Schema.Types.Mixed }],
-  CHIEF_COMPLAINT: [{ type: Schema.Types.Mixed }],
-  CLINICAL_DOCUMENTS: [{ type: Schema.Types.Mixed }],
-  CORRECTIVE_LENS: [{ type: Schema.Types.Mixed }],
-  DEFAULT_CLINICAL_PROVIDERS: [{ type: Schema.Types.Mixed }],
-  DEVICES_OR_MEDICAL_EQUIPMENT: [{ type: Schema.Types.Mixed }],
-  DME_ORDERS: [{ type: Schema.Types.Mixed }],
-  ENCOUNTER_DOCUMENTS: [{ type: Schema.Types.Mixed }],
-  ENCOUNTERS: [{ type: Schema.Types.Mixed }],
-  FAMILY_HISTORY: [{ type: Schema.Types.Mixed }],
-  GOALS: [{ type: Schema.Types.Mixed }],
-  GYN_HISTORY: [{ type: Schema.Types.Mixed }],
-  HEALTH_CONCERNS: [{ type: Schema.Types.Mixed }],
-  HISTORY_OF_PRESENT_ILLNESS: [{ type: Schema.Types.Mixed }],
-  IMAGING_RESULTS: [{ type: Schema.Types.Mixed }],
-  IMMUNIZATIONS: [{ type: Schema.Types.Mixed }],
-  LAB_RESULTS: [{ type: Schema.Types.Mixed }],
-  MEDICAL_RECORD_DOCUMENTS: [{ type: Schema.Types.Mixed }],
-  MEDICATIONS: [{ type: Schema.Types.Mixed }],
-  OBSERVATIONS: [{ type: Schema.Types.Mixed }],
-  ORDERS: [{ type: Schema.Types.Mixed }],
-  PAST_MEDICAL_HISTORY: [{ type: Schema.Types.Mixed }],
-  PHYSICAL_EXAM: [{ type: Schema.Types.Mixed }],
-  PROCEDURES: [{ type: Schema.Types.Mixed }],
-  REVIEW_OF_SYSTEMS: [{ type: Schema.Types.Mixed }],
-  SOCIAL_HISTORY: [{ type: Schema.Types.Mixed }],
-  SURGICAL_HISTORY: [{ type: Schema.Types.Mixed }],
-  VITALS: [{ type: Schema.Types.Mixed }]
-});
-
-const Patient = model<Patient>('Patient', patientSchema);
-
-export default Patient;
+export default mongoose.model<IPatient>('Patient', PatientSchema);

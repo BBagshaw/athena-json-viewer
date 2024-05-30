@@ -21,6 +21,7 @@
     "react-dom": "^18.3.1",
     "react-json-view": "1.21.3",
     "react-scripts": "5.0.1",
+    "react-table": "^7.8.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -53,5 +54,8 @@
       "react": "$react",
       "react-dom": "$react-dom"
     }
+  },
+  "devDependencies": {
+    "@types/react-table": "^7.7.20"
   }
 }

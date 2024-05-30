@@ -15,18 +15,4 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-// Add a new patient
-router.post('/', async (req: Request, res: Response) => {
-  const patient = new Patient(req.body);
-
-  try {
-    const newPatient = await patient.save();
-    res.status(201).json(newPatient);
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      res.status(400).json({ message: error.message });
-    }
-  }
-});
-
 export default router;

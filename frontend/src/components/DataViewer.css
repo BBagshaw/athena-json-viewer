@@ -1,132 +1,75 @@
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Aptos&display=swap');
-
-/* Apply a gradient background to the entire page */
+/* General Styling */
 body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Modern sans-serif font */
+  line-height: 1.6;
   margin: 0;
-  padding: 0;
-  font-family: 'Aptos', sans-serif;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Ensure the root div covers the entire viewport */
-#root {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  top: 20px;
-  align-items: center;
-  justify-content: center;
+  background-color: #f8f8f8; /* Subtle off-white background */
+  color: #333; /* Dark gray text for better contrast */
 }
 
 .container {
-  width: 90%;
-  max-width: 1200px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  max-width: 1200px; /* Limit container width for readability */
+  margin: 20px auto;
   padding: 20px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 8px; /* Rounded corners */
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.3);
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-.header h1 {
-  margin: 0;
-  font-size: 24px;
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
+.header h2 {
+  color: #007bff; /* Primary color for the header */
 }
 
-.button {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  color: #fff;
-  padding: 10px 20px;
-  margin-top: 15px;
-  cursor: pointer;
-  border: none;
-  font-size: 16px;
-  font-family: 'Aptos', sans-serif;
-  transition: background-color 0.3s, border 0.3s;
-}
-
-.button:hover {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
+/* Search Bar */
 .search-bar-container {
-  margin: 20px 0;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .search-bar {
-  width: 400px;
-  max-width: 800px;
-  padding: 10px 20px;
+  width: 100%; /* Full width on smaller screens */
+  max-width: 500px; /* Limit width on larger screens */
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 25px; /* More rounded search bar */
+  box-sizing: border-box;
   font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.3);
-  color: #fff;
-  outline: none;
-  font-family: 'Aptos', sans-serif;
 }
 
-.data-content {
+/* Table Styling */
+.table-container {
   overflow-x: auto;
-  padding: 10px;
 }
 
 table {
   width: 100%;
-  height: 800px;
   border-collapse: collapse;
-  color: #fff;
-  font-family: 'Aptos', sans-serif;
+  table-layout: fixed; /* Prevent table from getting too wide */
 }
 
 th, td {
-  padding: 15px;
+  padding: 12px;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid #eee; /* Lighter border */
 }
 
 th {
-  background-color: rgba(255, 255, 255, 0.3);
-  font-family: 'Poppins', sans-serif;
+  background-color: #007bff; /* Primary color for header background */
+  color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
 }
 
-tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  cursor: pointer;
+tr:hover {
+  background-color: #f5f5f5; /* Slightly lighter hover color */
 }
 
-tbody tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Modal styles */
 .modal {
   position: fixed;
   top: 0;
@@ -135,37 +78,31 @@ tbody tr:nth-child(even) {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 1000;
+  align-items: center;
 }
 
 .modal-content {
-  background: rgba(255, 255, 255, 0.9);
+  background: white;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  max-width: 600px;
+  border-radius: 5px;
   width: 90%;
+  max-width: 600px;
+  max-height: 90%;
   overflow-y: auto;
-  max-height: 80vh;
 }
 
-.modal-content h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: 'Poppins', sans-serif;
+/* Button Styling */
+.button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add transition for smoother hover effect */
 }
 
-.modal-content p {
-  color: #333;
-  font-family: 'Aptos', sans-serif;
-}
-
-.modal .button {
-  margin-top: 20px;
-  font-family: 'Aptos', sans-serif;
+.button:hover {
+  background-color: #0056b3;
 }
