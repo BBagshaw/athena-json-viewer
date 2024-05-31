@@ -5,6 +5,7 @@ import { msalConfig } from './authConfig';
 import DataViewer from './components/DataViewer';
 import Login from './components/Login';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const msalInstance = new PublicClientApplication(msalConfig);
 

@@ -1,108 +1,109 @@
-/* General Styling */
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Modern sans-serif font */
-  line-height: 1.6;
-  margin: 0;
-  background-color: #f8f8f8; /* Subtle off-white background */
-  color: #333; /* Dark gray text for better contrast */
-}
+/* DataViewer.css */
 
 .container {
-  max-width: 1200px; /* Limit container width for readability */
-  margin: 20px auto;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  border-radius: 8px; /* Rounded corners */
 }
 
-.header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.header h2 {
-  color: #007bff; /* Primary color for the header */
-}
-
-/* Search Bar */
-.search-bar-container {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.search-bar {
-  width: 100%; /* Full width on smaller screens */
-  max-width: 500px; /* Limit width on larger screens */
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 25px; /* More rounded search bar */
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-/* Table Styling */
-.table-container {
+.table-responsive {
+  display: block;
+  width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-table {
-  width: 100%;
+.table {
+  background-color: #fff;
   border-collapse: collapse;
-  table-layout: fixed; /* Prevent table from getting too wide */
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #eee; /* Lighter border */
-}
-
-th {
-  background-color: #007bff; /* Primary color for header background */
-  color: white;
-  font-weight: bold;
-  position: sticky;
-  top: 0;
-}
-
-tr:hover {
-  background-color: #f5f5f5; /* Slightly lighter hover color */
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 1rem;
+  color: #212529;
 }
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 5px;
-  width: 90%;
-  max-width: 600px;
-  max-height: 90%;
-  overflow-y: auto;
+.table th,
+.table td {
+  padding: 1.25rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
 }
 
-/* Button Styling */
-.button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Add transition for smoother hover effect */
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
 }
 
-.button:hover {
-  background-color: #0056b3;
+.table tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
+}
+
+.thead-dark th {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #454d55;
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    border: 0;
+  }
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-sm th,
+.table-sm td {
+  padding: 0.3rem;
+}
+
+.table-primary, .table-primary > th, .table-primary > td {
+  background-color: #b8daff;
+}
+
+.table-secondary, .table-secondary > th, .table-secondary > td {
+  background-color: #d6d8db;
+}
+
+.table-success, .table-success > th, .table-success > td {
+  background-color: #c3e6cb;
+}
+
+.table-info, .table-info > th, .table-info > td {
+  background-color: #bee5eb;
+}
+
+.table-warning, .table-warning > th, .table-warning > td {
+  background-color: #ffeeba;
+}
+
+.table-danger, .table-danger > th, .table-danger > td {
+  background-color: #f5c6cb;
+}
+
+.table-light, .table-light > th, .table-light > td {
+  background-color: #fdfdfe;
+}
+
+.table-dark, .table-dark > th, .table-dark > td {
+  background-color: #c6c8ca;
 }
