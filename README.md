@@ -132,38 +132,55 @@ Athena JSON Viewer is a modern web application designed to securely display pati
 ## Project Structure
 
 ```plaintext
-athena-json-viewer/
-│
-├── frontend/
-│   ├── .env
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── DataViewer.tsx
-│   │   │   ├── DataViewer.css
-│   │   │   ├── Login.tsx
-│   │   │   └── Login.css
-│   │   ├── App.tsx
-│   │   ├── authConfig.ts
-│   │   └── index.css
+athena-json-viewer-main
+├── athena-json-viewer-main
+│   ├── .gitattributes
+│   ├── .gitignore
+│   ├── LICENSE
+│   ├── README.md
+│   ├── package-lock.json
 │   ├── package.json
-│   └── tsconfig.json
-│
-├── backend/
-│   ├── src/
-│   │   ├── models/
-│   │   │   └── patient.ts
-│   │   ├── routes/
-│   │   │   └── patient.ts
-│   │   └── server.ts
-│   ├── data/
-│   │   └── demographics.json
-│   ├── importData.js
-│   ├── package.json
-│   └── tsconfig.json
-│
-├── .gitignore
-├── LICENSE
-└── README.md
+│   ├── backend
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── tsconfig.json
+│   │   └── src
+│   │       ├── server.ts
+│   │       ├── models
+│   │       │   └── patient.ts
+│   │       └── routes
+│   │           └── patient.ts
+│   └── frontend
+│       ├── .gitignore
+│       ├── README.md
+│       ├── package-lock.json
+│       ├── package.json
+│       ├── tsconfig.json
+│       ├── public
+│       │   ├── favicon.ico
+│       │   ├── index.html
+│       │   ├── logo192.png
+│       │   ├── logo512.png
+│       │   ├── manifest.json
+│       │   └── robots.txt
+│       └── src
+│           ├── App.css
+│           ├── App.test.tsx
+│           ├── App.tsx
+│           ├── authConfig.ts
+│           ├── index.css
+│           ├── index.tsx
+│           ├── logo.svg
+│           ├── react-app-env.d.ts
+│           ├── reportWebVitals.ts
+│           ├── setupTests.ts
+│           └── components
+│               ├── DataViewer.css
+│               ├── DataViewer.tsx
+│               ├── Login.css
+│               ├── Login.tsx
+│               └── types
+│                   └── react-table-config.d.ts
 ```
 
 ## Contributing
