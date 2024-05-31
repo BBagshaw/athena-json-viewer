@@ -9,6 +9,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
+/**
+ * This file contains the main App component of the Athena JSON Viewer frontend.
+ * The App component is responsible for rendering the application and managing the authentication state.
+ */
+
 const App: React.FC = () => {
   useEffect(() => {
     const callbackId = msalInstance.addEventCallback((event) => {

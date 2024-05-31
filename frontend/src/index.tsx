@@ -1,3 +1,6 @@
+// This file is the entry point for the React application.
+// It renders the root component and initializes the app.
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
